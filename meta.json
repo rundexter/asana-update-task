@@ -4,23 +4,77 @@
 {
     //Required. Inputs the module expects.
     "inputs": [
-        //e.g.
-        /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "task",
+            "title":"task ID [is required]"
+        },
+        {
+            "id": "assignee",
+            "title":"assignee"
+        },
+        {
+            "id": "assignee_status",
+            "title":"assignee_status"
+        },
+        {
+            "id": "completed",
+            "title":"completed"
+        },
+        {
+            "id": "due_on",
+            "title":"due_on"
+        },
+        {
+            "id": "name",
+            "title":"name"
+        },
+        {
+            "id": "external",
+            "title":"external"
+        },
+        {
+            "id": "notes",
+            "title":"notes"
+        },
+        {
+            "id": "projects",
+            "title":"projects"
         }
-        */
     ],
     //Required. Outputs the module emits.
     "outputs": [
-      //e.g.
-      /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "name",
+            "title":"name"
+        },
+        {
+            "id": "notes",
+            "title":"notes"
+        },
+        {
+            "id": "assignee_name",
+            "title":"assignee name"
+        },
+        {
+            "id": "completed",
+            "title":"completed"
+        },
+        {
+            "id": "followers_name",
+            "title":"followers name"
+        },
+        {
+            "id": "workspace_name",
+            "title":"workspace name"
+        },
+        {
+            "id": "due_on",
+            "title":"due_on"
+        },
+        {
+            "id": "projects_name",
+            "title":"projects name"
         }
-      */
     ],
     "title": "Asana Update Task" /* Required.A display name for the module */
 }
