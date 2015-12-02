@@ -119,7 +119,13 @@ module.exports = {
 
         this.apiRequest('put', 'tasks/'.concat(step.input('task').first()), _.pick(step.inputs(), inputAttributes), auth, function (error, responce, body) {
 
-            this.complete(this.pickResult(body, globalPickResult));
+            if (error || body.errors) {
+
+                this.fail(error || body.errors);
+            } else {
+
+                this.complete(this.pickResult(body, globalPickResult));
+            }
         }.bind(this));
     }
 };
