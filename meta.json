@@ -76,5 +76,6 @@
             "title":"projects name"
         }
     ],
+    "icon": "tasks",
     "title": "Asana Update Task" /* Required.A display name for the module */
 }
