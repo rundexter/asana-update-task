@@ -76,6 +76,9 @@
             "title":"projects name"
         }
     ],
+    "providers": [{
+        "name": "asana"
+    }],
     "icon": "tasks",
     "title": "Asana Update Task" /* Required.A display name for the module */
 }
