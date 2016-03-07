@@ -25,7 +25,7 @@ var _ = require('lodash'),
         'due_on': 'data.due_on'
     };
 
-require( 'request-debug' )(request);
+/*require( 'request-debug' )(request); */
 
 module.exports = {
     /**
