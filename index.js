@@ -1,7 +1,7 @@
 var _ = require('lodash'),
     util = require('./util.js'),
     request = require('request').defaults({
-        baseUrl: 'https://app.asana.com/api/1.0/'
+        /* baseUrl: 'https://app.asana.com/api/1.0/' */
     }),
     pickInputs = {
         'task': { key: 'task', validate: { req: true } },
@@ -25,6 +25,8 @@ var _ = require('lodash'),
         'due_on': 'data.due_on'
     };
 
+require( 'request-debug' )(request);
+
 module.exports = {
     /**
      * The main entry point for the Dexter module
@@ -41,14 +43,15 @@ module.exports = {
         if (validateErrors)
             return this.fail(validateErrors);
 
+        var task_id = inputs.task.substr( 0, 8 ) == 'external' ? 'external:' + encodeURIComponent( inputs.task.substr( 9 ) ) : inputs.task;
+
         //send API request
         request.put({
-            uri: 'tasks/' + inputs.task,
-            form: _.omit(inputs, 'task'),
+            uri: 'https://app.asana.com/api/1.0/tasks/' + task_id,
+            body: JSON.stringify( { 'data': _.omit(inputs, 'task') } ),
             auth: {
                 'bearer': credentials
             },
-            json: true
         }, function (error, response, body) {
             if (error || (body && body.errors) || response.statusCode >= 400)
                 this.fail(error || body.errors || { statusCode: response.statusCode, headers: response.headers, body: body });
