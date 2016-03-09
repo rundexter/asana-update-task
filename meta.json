@@ -17,7 +17,7 @@
         "title":"completed"
     }, {
         "id": "due_on",
-        "title":"due_on"
+        "title":"Due On"
     }, {
         "id": "name",
         "title":"name"
@@ -48,7 +48,7 @@
         "title":"workspace name"
     }, {
         "id": "due_on",
-        "title":"due_on"
+        "title":"Due On"
     }, {
         "id": "projects_name",
         "title":"projects name"
