@@ -8,50 +8,47 @@
         "description": "Required. The Id of the task to update"
     }, {
         "id": "assignee",
-        "title":"assignee"
-    }, {
-        "id": "assignee_status",
-        "title":"assignee_status"
+        "title":"Assignee"
     }, {
         "id": "completed",
-        "title":"completed"
+        "title":"Completed"
     }, {
         "id": "due_on",
         "title":"Due On"
     }, {
         "id": "name",
-        "title":"name"
+        "title":"Name"
     }, {
         "id": "notes",
-        "title":"notes"
+        "title":"Notes"
     }, {
         "id": "projects",
-        "title":"projects"
+        "title":"Projects"
     }],
     "outputs": [{
         "id": "name",
-        "title":"name"
+        "title":"Name"
     }, {
         "id": "notes",
-        "title":"notes"
+        "title":"Notes"
     }, {
         "id": "assignee_name",
-        "title":"assignee name"
+        "title":"Assignee Name"
     }, {
         "id": "completed",
-        "title":"completed"
+        "title":"Completed"
     }, {
         "id": "followers_name",
-        "title":"followers name"
+        "title":"Followers Name"
     }, {
         "id": "workspace_name",
-        "title":"workspace name"
+        "title":"Workspace Name"
     }, {
         "id": "due_on",
         "title":"Due On"
     }, {
         "id": "projects_name",
-        "title":"projects name"
+        "title":"Projects Name"
     }],
     "providers": [{
         "name": "asana"
