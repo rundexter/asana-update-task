@@ -1,31 +1,7 @@
-var _ = require('lodash'),
-    util = require('./util.js'),
-    request = require('request').defaults({
-        /* baseUrl: 'https://app.asana.com/api/1.0/' */
-    }),
-    pickInputs = {
-        'task': { key: 'task', validate: { req: true } },
-        'assignee': 'assignee',
-        'assignee_status': 'assignee_status',
-        'completed': 'completed',
-        'due_on': 'due_on',
-        'name': 'name',
-        'external': 'external',
-        'projects': 'projects',
-        'notes': 'notes'
-    },
-    pickOutputs = {
-        'name': 'data.name',
-        'notes': 'data.notes',
-        'assignee_name': 'data.assignee.name',
-        'completed': 'data.completed',
-        'followers_name': { key: 'data.followers', fields: ['name'] },
-        'projects_name': { key: 'data.projects', fields: ['name'] },
-        'workspace_name': 'data.workspace.name',
-        'due_on': 'data.due_on'
-    };
-
-/*require( 'request-debug' )(request); */
+var _ = require('lodash')
+  , q = require('q')
+  , req = require('superagent')
+;
 
 module.exports = {
     /**
@@ -35,29 +11,49 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
-        var credentials = dexter.provider('asana').credentials('access_token'),
-            inputs = util.pickInputs(step, pickInputs),
-            validateErrors = util.checkValidateErrors(inputs, pickInputs);
+        var credentials    = dexter.provider('asana').credentials('access_token')
+          , inputs         = _.omit(step.inputs(), 'task')
+          , tasks          = step.input('task')
+          , promises       = []
+        ;
 
-        // check params.
-        if (validateErrors)
-            return this.fail(validateErrors);
+        tasks.each(function(task) {
 
-        var task_id = inputs.task.substr( 0, 8 ) == 'external' ? 'external:' + encodeURIComponent( inputs.task.substr( 9 ) ) : inputs.task;
+            var url     = 'https://app.asana.com/api/1.0/tasks/' + encodeURIComponent(task)
+              , request = req.put(url)
+                              .type('json')
+                              .set('Authorization', 'Bearer '+credentials)
+                              .send( { data: inputs } )
+            ;
 
-        //send API request
-        request.put({
-            uri: 'https://app.asana.com/api/1.0/tasks/' + task_id,
-            body: JSON.stringify( { 'data': _.omit(inputs, 'task') } ),
-            auth: {
-                'bearer': credentials
-            },
-        }, function (error, response, body) {
-            if (error || (body && body.errors) || response.statusCode >= 400)
-                this.fail(error || body.errors || { statusCode: response.statusCode, headers: response.headers, body: body });
-            else
-                this.complete(util.pickOutputs(body, pickOutputs) || {});
+            console.log(url, inputs);
 
-        }.bind(this));
+            promises.push(
+                promisify(request, 'end', 'body.data')
+            );
+        });
+
+        q.all(promises)
+          .then(this.complete.bind(this))
+          .catch(this.fail.bind(this));
     }
 };
+
+function promisify(scope, call, path) {
+    var deferred = q.defer(); 
+
+    scope[call](function(err, result) {
+        return err
+          ? deferred.reject(err)
+          : deferred.resolve(_.get(result, path))
+        ;
+    });
+
+    return deferred.promise;
+}
+
+function setIfExists(obj, key, value) {
+    if(value !== null & value !== undefined) {
+        obj[key] = value;
+    }
+}

@@ -2,78 +2,57 @@
  * Metadata describing the module operation
  */
 {
-    "inputs": [
-        {
-            "id": "task",
-            "title":"task ID [is required]"
-        },
-        {
-            "id": "assignee",
-            "title":"assignee"
-        },
-        {
-            "id": "assignee_status",
-            "title":"assignee_status"
-        },
-        {
-            "id": "completed",
-            "title":"completed"
-        },
-        {
-            "id": "due_on",
-            "title":"due_on"
-        },
-        {
-            "id": "name",
-            "title":"name"
-        },
-        {
-            "id": "external",
-            "title":"external"
-        },
-        {
-            "id": "notes",
-            "title":"notes"
-        },
-        {
-            "id": "projects",
-            "title":"projects"
-        }
-    ],
-    "outputs": [
-        {
-            "id": "name",
-            "title":"name"
-        },
-        {
-            "id": "notes",
-            "title":"notes"
-        },
-        {
-            "id": "assignee_name",
-            "title":"assignee name"
-        },
-        {
-            "id": "completed",
-            "title":"completed"
-        },
-        {
-            "id": "followers_name",
-            "title":"followers name"
-        },
-        {
-            "id": "workspace_name",
-            "title":"workspace name"
-        },
-        {
-            "id": "due_on",
-            "title":"due_on"
-        },
-        {
-            "id": "projects_name",
-            "title":"projects name"
-        }
-    ],
+    "inputs": [{
+        "id": "task",
+        "title":"Task Id",
+        "description": "Required. The Id of the task to update"
+    }, {
+        "id": "assignee",
+        "title":"assignee"
+    }, {
+        "id": "assignee_status",
+        "title":"assignee_status"
+    }, {
+        "id": "completed",
+        "title":"completed"
+    }, {
+        "id": "due_on",
+        "title":"due_on"
+    }, {
+        "id": "name",
+        "title":"name"
+    }, {
+        "id": "notes",
+        "title":"notes"
+    }, {
+        "id": "projects",
+        "title":"projects"
+    }],
+    "outputs": [{
+        "id": "name",
+        "title":"name"
+    }, {
+        "id": "notes",
+        "title":"notes"
+    }, {
+        "id": "assignee_name",
+        "title":"assignee name"
+    }, {
+        "id": "completed",
+        "title":"completed"
+    }, {
+        "id": "followers_name",
+        "title":"followers name"
+    }, {
+        "id": "workspace_name",
+        "title":"workspace name"
+    }, {
+        "id": "due_on",
+        "title":"due_on"
+    }, {
+        "id": "projects_name",
+        "title":"projects name"
+    }],
     "providers": [{
         "name": "asana"
     }],
